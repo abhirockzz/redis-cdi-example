@@ -6,6 +6,5 @@
 
 ## To check
 
-- execute a HTTP `POST` to `http://localhost:8080/redis-cdi-example/kv/test-key` - this uses the injected `Jedis` from the pool. The key-value pair is now in Redis
-- execute a HTTP `GET` to `http://localhost:8080/redis-cdi-example/kv/test-key` - this uses the simple `Jedis` connection. You should see the value you stored in the previous step
-
+- execute a HTTP `POST` to `http://localhost:8080/redis-cdi-example/kv/test-key` - this uses the [injected `Jedis` from the pool](https://github.com/abhirockzz/redis-cdi-example/blob/master/src/main/java/com/wordpress/abhirockzz/redis/cdi/PooledJedisProducer.java). The key-value pair is now in Redis
+- execute a HTTP `GET` to `http://localhost:8080/redis-cdi-example/kv/test-key` - this uses the [simple `Jedis` connection](https://github.com/abhirockzz/redis-cdi-example/blob/master/src/main/java/com/wordpress/abhirockzz/redis/cdi/JedisProducer.java). You should see the value you stored in the previous step
