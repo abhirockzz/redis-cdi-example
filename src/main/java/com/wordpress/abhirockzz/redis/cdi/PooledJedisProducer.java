@@ -17,7 +17,7 @@ public class PooledJedisProducer {
     private JedisPool pool = null;
 
     /**
-     * sets up the pool.. invoked only once since bean is ApplicaitonScoped
+     * sets up the pool.. invoked only once since bean is ApplicaitionScoped
      */
     @PostConstruct
     public void initPool() {
@@ -41,7 +41,7 @@ public class PooledJedisProducer {
         return jedis;
     }
 
-    public void returnB(@Disposes @FromJedisPool Jedis jedis) {
+    public void backToPool(@Disposes @FromJedisPool Jedis jedis) {
         pool.returnResource(jedis);
         System.out.println("Returned resource to Jedis pool");
     }
