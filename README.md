@@ -1,10 +1,11 @@
-## To run
+## Start with Docker Compose
 
-- Start Redis on `localhost` and port 6379, else use `REDIS_HOST` and `REDIS_PORT` environment variables to point to another Redis instance
-- `git clone` the project and execute `mvn clean install`
-- Deploy `redis-cdi.war` in `target` directory to any of the [Java EE 7 containers](http://www.oracle.com/technetwork/java/javaee/overview/compatibility-jsp-136984.html)
+- `git clone https://github.com/abhirockzz/redis-cdi-example.git`
+- `mvn clean install` - creates `redis-cdi.war` in `target` dir
+- `docker-compose up --build` - starts Redis and TomEE containers (you can switch to any other Java EE runtime)
 
-## To check
+## Test
 
-- execute a HTTP `POST` to `http://localhost:8080/redis-cdi-example/kv/test-key` - this uses the [injected `Jedis` from the pool](https://github.com/abhirockzz/redis-cdi-example/blob/master/src/main/java/com/wordpress/abhirockzz/redis/cdi/PooledJedisProducer.java). The key-value pair is now in Redis
-- execute a HTTP `GET` to `http://localhost:8080/redis-cdi-example/kv/test-key` - this uses the [simple `Jedis` connection](https://github.com/abhirockzz/redis-cdi-example/blob/master/src/main/java/com/wordpress/abhirockzz/redis/cdi/JedisProducer.java). You should see the value you stored in the previous step
+- `docker-machine ip` - get the IP address of your Docker host. Let's call it `APP_HOST`
+- `curl -X POST http://<APP_HOST>/redis-cdi/kv/hello -d world` - this uses the [injected `Jedis` from the pool](https://github.com/abhirockzz/redis-cdi-example/blob/master/src/main/java/com/wordpress/abhirockzz/redis/cdi/PooledJedisProducer.java) to insert a key-value pair in Redis
+- `curl -X GET http://<APP_HOST>:8080/redis-cdi/kv/hello` - this uses the [simple `Jedis` connection](https://github.com/abhirockzz/redis-cdi-example/blob/master/src/main/java/com/wordpress/abhirockzz/redis/cdi/JedisProducer.java) to fetch the value from Redis. You should get `world` in response (`HTTP 200`)

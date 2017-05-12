@@ -1,0 +1,16 @@
+redis:
+  image: redis
+  container_name: "red"
+  ports:
+    - "6379:6379"
+
+redis-cdi:
+  build: .
+  container_name: "redis-cdi"
+  ports:
+    - "8080:8080"  
+  links:
+    - redis:red  
+  environment:
+    - REDIS_HOST=red
+    - REDIS_PORT=6379
