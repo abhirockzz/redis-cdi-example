@@ -2,7 +2,7 @@
 
 - `git clone https://github.com/abhirockzz/redis-cdi-example.git`
 - `mvn clean install` - creates `redis-cdi.war` in `target` dir
-- `docker-compose up --build` - starts Redis and TomEE containers (you can switch to any other Java EE runtime)
+- `docker-compose up --build` - starts Redis and TomEE containers (you can switch to any other [Java EE runtime](https://github.com/abhirockzz/redis-cdi-example/blob/master/Dockerfile#L1))
 
 ## Test
 
